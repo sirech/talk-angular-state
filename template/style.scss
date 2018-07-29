@@ -214,3 +214,13 @@ blockquote {
     left: 0 !important;
   }
 }
+
+// Mine
+
+.transition {
+  background-color: $secondary;
+  vertical-align: middle;
+  text-align: center;
+  &, h1, h2 { color: $text-light; }
+  h1 { font-size: $font-size-impact; }
+}
