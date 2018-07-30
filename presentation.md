@@ -16,14 +16,23 @@ class: impact no-counter
 
 ---
 
-# Title
+# What is state management?
+
+- Represent dynamic state
+- Trigger changes:
+* User Input
+* Remote calls
+- Represent in state
 
 ---
 
 # Me
 
-- Declared _React_ fan
-- Probably unqualified to provide too many opinions on _Angular_
+Declared _React_ fan
+
+--
+
+Probably unqualified to provide too many opinions on _Angular_
 
 --
 
@@ -43,17 +52,128 @@ class: transition
 
 ---
 
+```html
+  <!-- Parent component template -->
+  <child-component
+    [parentForm]="formGroup">
+```
+
+```typescript
+class ChildComponent implements OnInit {
+  @Input() parentForm: FormGroup
+  
+  ngOnInit() {
+    this.parentForm.setControl('stuff', this.myControl);
+  }
+}
+```
+
+---
+
 class: transition
 
 # Input/Output
 
 ---
 
-# Through pass
+# What
+
+Most components do not hold their own state
+
+--
+
+Instead, they receive their data as `@Input`, and trigger changes upstream with `@Output`
+
+---
+
+# The input train
 
 .center[
   ![Long Chain](images/long-chain.png)
 ]
+
+---
+
+# The sideways state
+
+.lateral-state.center[
+  ![Lateral State](images/lateral-state.png)
+]
+
+---
+
+class: transition
+
+# ngrx-store
+
+---
+
+# The harsh reality of introducing _Redux_
+
+---
+
+class: transition
+
+# Data Services
+
+---
+
+# What
+
+A _Service_ that:
+
+- holds data
+- offers an API to manipulate it
+- provides a way to get notified of updates
+
+---
+
+## A simple service
+
+```typescript
+@Injectable()
+export class Store {
+  private timeslotSubject = new BehaviorSubject<string>(null);
+  timeslot$ = this.timeslotSubject.asObservable();
+
+  selectTimeslot(timeslot: string) {
+    this.timeslotSubject.next(timeslot);
+  }
+}
+
+```
+
+---
+
+## Changing the state
+
+```typescript
+class Publisher implements OnInit {
+  constructor(private store: Store) {}
+  
+  onSelection(ts: string) {
+    this.store.selectTimeslot(ts);
+  }
+}
+```
+
+---
+
+## Getting updates
+
+```typescript
+class Subscriber implements OnInit {
+  timeslot: string
+  
+  constructor(private store: Store) {}
+  
+  ngOnInit() {
+    this.store.timeslot$
+      .filter(ts => !!ts)
+      .subscribe(ts => this.timeslot = ts)
+  }
+}
+```
 
 ---
 
