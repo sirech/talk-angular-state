@@ -225,6 +225,16 @@ blockquote {
   h1 { font-size: $font-size-impact; }
 }
 
+.slogan {
+  vertical-align: middle;
+  text-align: center;
+  h1 { font-size: $font-size-impact; }
+}
+
 .lateral-state {
   margin-top: 128px;
+}
+
+.scaled-image img {
+  height: 512px;
 }

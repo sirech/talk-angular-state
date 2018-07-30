@@ -26,6 +26,7 @@ class: impact no-counter
 
 ---
 
+
 # Me
 
 Declared _React_ fan
@@ -37,6 +38,112 @@ Probably unqualified to provide too many opinions on _Angular_
 --
 
 Will do so anyway
+
+---
+
+class: impact no-counter
+
+# Context
+
+---
+
+```bash
+commit 4db543c897d44849eb073facfe1562a156b02137
+Author: Frontend Dev
+Date:   Sun Oct 30 21:10:48 2016 +0100
+
+    Initial commit
+
+```
+
+---
+
+.center[
+  ![Angular](images/angular.png)
+]
+
+---
+
+.center[
+  ![Many](images/many-people.png)
+]
+
+---
+
+.scaled-image.center[
+  ![cp](images/cp.jpg)
+]
+
+---
+
+class: impact no-counter
+
+# Patterns
+
+---
+
+class: transition
+
+# Input/Output
+
+---
+
+# What
+
+Most components do not hold their own state
+
+--
+
+Instead, they receive their data as `@Input`, and trigger changes upstream with `@Output`
+
+---
+
+## Example
+
+```typescript
+class SimpleComponent {
+  @Input() selectedDate: Date;
+  @Output() onJump = new EventEmitter<Date>();
+
+  jumpBack(date: Date) {
+    this.onJumpto.emit(date);
+  }
+}
+```
+
+---
+
+.center[
+  ![Thumbs Up](images/thumbsup.png)
+]
+
+---
+
+class: slogan
+
+## That's it, problem solved
+
+---
+
+class: slogan no-counter
+
+## End
+
+---
+
+# The input train
+
+.center[
+  ![Long Chain](images/long-chain.png)
+]
+
+---
+
+# The sideways state
+
+.lateral-state.center[
+  ![Lateral State](images/lateral-state.png)
+]
 
 ---
 
@@ -72,43 +179,14 @@ class ChildComponent implements OnInit {
 
 class: transition
 
-# Input/Output
-
----
-
-# What
-
-Most components do not hold their own state
-
---
-
-Instead, they receive their data as `@Input`, and trigger changes upstream with `@Output`
-
----
-
-# The input train
-
-.center[
-  ![Long Chain](images/long-chain.png)
-]
-
----
-
-# The sideways state
-
-.lateral-state.center[
-  ![Lateral State](images/lateral-state.png)
-]
-
----
-
-class: transition
-
 # ngrx-store
 
 ---
 
 # The harsh reality of introducing _Redux_
+
+- _Redux_ is not the easiest library to explain, specially to developers without frontend background
+- Incremental adoption is problematic
 
 ---
 
