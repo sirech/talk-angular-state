@@ -18,18 +18,16 @@ class: impact no-counter
 
 # What is state management?
 
-- Represent dynamic state
-- Trigger changes:
-* User Input
-* Remote calls
-- Represent in state
+.scaled-image.center[
+  ![Redux](images/redux-logo.png)
+]
 
 ---
 
 
-# Me
+# Disclaimer
 
-Declared _React_ fan
+I am a declared _React_ fan
 
 --
 
@@ -90,13 +88,20 @@ class: transition
 
 # What
 
-Most components do not hold their own state
+--
+
+Most components do not hold their own state ()
 
 --
 
 Instead, they receive their data as `@Input`, and trigger changes upstream with `@Output`
 
+--
+
+Presentational Components, Dumb Components, Functional Components
+
 ---
+
 
 ## Example
 
@@ -113,12 +118,6 @@ class SimpleComponent {
 
 ---
 
-.center[
-  ![Thumbs Up](images/thumbsup.png)
-]
-
----
-
 class: slogan
 
 ## That's it, problem solved
@@ -128,6 +127,12 @@ class: slogan
 class: slogan no-counter
 
 ## End
+
+---
+
+class: slogan no-counter
+
+## Maybe not
 
 ---
 
@@ -147,9 +152,59 @@ class: slogan no-counter
 
 ---
 
+class: impact no-counter
+
+# Let's take a break to talk about bad ideas
+
+---
+
 class: transition
 
 # ViewChild
+
+---
+
+# What
+
+--
+
+A way to bind a child component to a variable
+
+--
+
+Access the child's component state directly
+
+---
+
+```typescript
+class Evil {
+  @ViewChild(PoorChildrenComponent)
+  sayGoodbyeToEncapsulation: PoorChildrenComponent; 
+
+  beEvil() {
+    this.sayGoodbyeToEncapsulation.changeStuffExternally();
+  }
+}
+```
+
+---
+
+class: slogan
+
+## Break encapsulation
+
+---
+
+class: slogan no-counter
+
+## Couple components forever
+
+---
+
+
+.center[
+  ![WTF](images/wtf.png)
+]
 
 ---
 
@@ -159,11 +214,25 @@ class: transition
 
 ---
 
+# What
+
+--
+
+Combine multiple forms
+
+--
+
+Treat them as one
+
+---
+
 ```html
   <!-- Parent component template -->
   <child-component
     [parentForm]="formGroup">
 ```
+
+---
 
 ```typescript
 class ChildComponent implements OnInit {
@@ -177,16 +246,75 @@ class ChildComponent implements OnInit {
 
 ---
 
+```typescript
+class ParentComponent implements OnInit {
+  formGroup: FormGroup
+  
+  youWontLikeThis() {
+    this.formGroup.get('stuff').setValue('surprise!');
+  }
+}
+
+```
+
+---
+
+class: transition
+
+# Service as a Global
+
+---
+
+```typescript
+@Injectable()
+export class GlobalService {
+  stuf: string
+  moreStuff: string
+}
+```
+
+---
+
+.center[
+  ![shortcut](images/shortcut.jpg)
+]
+
+---
+
+class: impact no-counter
+
+# Back to more reasonable practices
+
+---
+
 class: transition
 
 # ngrx-store
 
 ---
 
+# What
+
+--
+
+`Redux` for angular
+
+--
+
+.center[
+  ![redux](images/redux.png)
+]
+
+---
+
 # The harsh reality of introducing _Redux_
 
-- _Redux_ is not the easiest library to explain, specially to developers without frontend background
+- _Redux_ is not the easiest library to explain, specially to developers without a frontend background
 - Incremental adoption is problematic
+
+--
+
+- To say the least
 
 ---
 
@@ -252,6 +380,21 @@ class Subscriber implements OnInit {
   }
 }
 ```
+
+---
+
+class: impact no-counter
+
+# Summary
+
+---
+
+# Learnings
+
+- `Angular` offers many shortcuts that can be easily misused
+- **Discipline** is needed to keep your app under control
+- _Data Services_ seem to be the most accepted pattern
+- _Input/Output_ work as well, specially for simple apps
 
 ---
 
