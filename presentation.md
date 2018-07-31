@@ -22,10 +22,16 @@ class: impact no-counter
   ![Redux](images/redux-logo.png)
 ]
 
+???
+
+State management I think about something like redux
+
 ---
 
 
 # Disclaimer
+
+--
 
 I am a declared _React_ fan
 
@@ -90,7 +96,7 @@ class: transition
 
 --
 
-Most components do not hold their own state ()
+Most components do not hold their own state
 
 --
 
@@ -268,7 +274,7 @@ class: transition
 ```typescript
 @Injectable()
 export class GlobalService {
-  stuf: string
+  stuff: string
   moreStuff: string
 }
 ```
@@ -307,14 +313,17 @@ class: transition
 
 ---
 
+class: slogan
+
+## This will be the final solution, I thought
+
+---
+
 # The harsh reality of introducing _Redux_
 
 - _Redux_ is not the easiest library to explain, specially to developers without a frontend background
 - Incremental adoption is problematic
-
---
-
-- To say the least
+- Not as established as a pattern in the community
 
 ---
 
@@ -380,6 +389,14 @@ class Subscriber implements OnInit {
   }
 }
 ```
+
+---
+
+# Caveats
+
+- Only partially adopted
+- Not always clear which components should subscribe
+- Should a publisher hold its own state, or get it through the service as well? 
 
 ---
 
